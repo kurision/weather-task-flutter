@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_task/features/homepage/state/user_state.dart';
@@ -140,12 +139,17 @@ class _HomePageViewState extends ConsumerState<HomePageView> {
         children: [
           Text(
             '${state.weatherModel.temperatureInCelsius.toString()} \u00B0 C',
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10),
-          CustomText(text: state.weatherModel.weatherCondition),
-          const SizedBox(height: 10),
-          Image.network("https:${state.weatherModel.iconUrl}"),
+          const SizedBox(height: 15),
+          CustomText(text: state.weatherModel.weatherCondition, fontSize: 30),
+          const SizedBox(height: 15),
+          Image.network(
+            "https:${state.weatherModel.iconUrl}",
+            scale: 0.5,
+          ),
+          const SizedBox(height: 15),
+          CustomText(text: state.weatherModel.cityName, fontSize: 20),
         ],
       ),
     );
