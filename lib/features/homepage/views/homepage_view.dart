@@ -1,22 +1,47 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_task/features/homepage/state/user_state.dart';
 import 'package:weather_task/features/homepage/state/weather_state.dart';
 import 'package:weather_task/features/splash/help_screen.dart';
 
 import '../widgets/custom_text_widget.dart';
 
-class HomePageView extends ConsumerWidget {
+class HomePageView extends ConsumerStatefulWidget {
   const HomePageView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final TextEditingController cityController = TextEditingController();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageViewState();
+}
+
+class _HomePageViewState extends ConsumerState<HomePageView> {
+  final TextEditingController cityController = TextEditingController();
+
+  @override
+  void initState() {
+    ref.read(userStateProvider.notifier).getUserCity().then((value) {
+      cityController.text = ref.read(userStateProvider) ?? '';
+      if (cityController.text.isEmpty) {
+        ref.read(weatherProvider.notifier).fetchWeatherFromDeviceLocation();
+      } else {
+        ref.watch(weatherProvider.notifier).fetchWeather(cityController.text);
+      }
+    });
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final userState = ref.watch(userStateProvider);
+
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const HelpScreen(),
@@ -48,6 +73,9 @@ class HomePageView extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
+                ref
+                    .read(userStateProvider.notifier)
+                    .setUserCity(cityController.text);
                 if (cityController.text.isEmpty) {
                   ref
                       .read(weatherProvider.notifier)
@@ -58,7 +86,8 @@ class HomePageView extends ConsumerWidget {
                       .fetchWeather(cityController.text);
                 }
               },
-              child: const Text('Save or Update'),
+              child: Text(
+                  userState == null || userState.isEmpty ? 'Save' : 'Update'),
             ),
             const SizedBox(
               height: 40,
@@ -111,7 +140,7 @@ class HomePageView extends ConsumerWidget {
       child: Column(
         children: [
           Text(
-            '${state.weatherModel.temperatureInCelsius.toString()} C',
+            '${state.weatherModel.temperatureInCelsius.toString()} \u00B0 C',
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
@@ -124,7 +153,15 @@ class HomePageView extends ConsumerWidget {
   }
 
   Container _initialState(ref) {
-    ref.read(weatherProvider.notifier).fetchWeatherFromDeviceLocation();
-    return Container();
+    //ref.read(weatherProvider.notifier).fetchWeatherFromDeviceLocation();
+    return Container(
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
+      child: const Column(
+        children: [
+          Text('No Data'),
+        ],
+      ),
+    );
   }
 }

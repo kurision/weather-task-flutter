@@ -1,8 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_task/features/homepage/views/homepage_view.dart';
 
-class HelpScreen extends StatelessWidget {
+class HelpScreen extends StatefulWidget {
   const HelpScreen({super.key});
+
+  @override
+  State<HelpScreen> createState() => _HelpScreenState();
+}
+
+class _HelpScreenState extends State<HelpScreen> {
+  @override
+  void initState() {
+    Future.delayed(Duration(seconds: 5), () {
+      setIsFirstTime();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const HomePageView();
+          },
+        ),
+      );
+    });
+    super.initState();
+  }
+
+  Future<void> setIsFirstTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isFirstTime', false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +57,9 @@ class HelpScreen extends StatelessWidget {
                   height: 20,
                 ),
                 TextButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      await setIsFirstTime();
+
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
