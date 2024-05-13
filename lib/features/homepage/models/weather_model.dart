@@ -4,20 +4,23 @@ import 'dart:convert';
 class WeatherModel {
   final double temperatureInCelsius;
   final double temperatureInFahrenheit;
-  final String waetherCondition;
+  final String weatherCondition;
   final String iconUrl;
-  WeatherModel({
+  final String cityName;
+  WeatherModel( {
     required this.temperatureInCelsius,
     required this.temperatureInFahrenheit,
-    required this.waetherCondition,
+    required this.weatherCondition,
     required this.iconUrl,
+    required this.cityName,
   });
 
   factory WeatherModel.fromMap(Map<String, dynamic> map) {
     return WeatherModel(
+      cityName:map['location']['name'] as String,
       temperatureInCelsius: map['current']['temp_c'] ,
       temperatureInFahrenheit: map['current']['temp_f'] ,
-      waetherCondition: map['current']['condition']['text'] as String,
+      weatherCondition: map['current']['condition']['text'] as String,
       iconUrl:  map['current']['condition']['icon'] as String,
     );
   }
