@@ -12,11 +12,11 @@ git clone git@github.com:kurision/weather-task-flutter.git
 ```
 
 ## Usage
-Then Run pub get in the project terminal to get all the packages.
+Then Run pub get in the project terminal to get all the dependent packages.
 ```bash
 flutter pub get
 ```
-Then you can build and run the App.
+Then you can the App.
 ```bash
-flutter build apk && flutter install
+flutter run
 ```
