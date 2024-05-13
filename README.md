@@ -16,7 +16,7 @@ Then Run pub get in the project terminal to get all the dependent packages.
 ```bash
 flutter pub get
 ```
-Then you can the App.
+You can run the App By
 ```bash
 flutter run
 ```
