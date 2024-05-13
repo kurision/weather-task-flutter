@@ -22,3 +22,12 @@ flutter run
 ```
 
 ## App Screenshots
+![Splash Screen](https://github.com/kurision/weather-task-flutter/blob/main/assets/screenshots/splash.png)
+---
+![Home Screen](https://github.com/kurision/weather-task-flutter/blob/main/assets/screenshots/home.png)
+---
+![Home Screen 2](https://github.com/kurision/weather-task-flutter/blob/main/assets/screenshots/home_1.png)
+---
+![Location Permission](https://github.com/kurision/weather-task-flutter/blob/main/assets/screenshots/location.png)
+---
+![Home Screen 3](https://github.com/kurision/weather-task-flutter/blob/main/assets/screenshots/home_2.png)
