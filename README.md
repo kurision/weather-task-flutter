@@ -1,16 +1,22 @@
-# weather_task
+# Weather App
 
-A new Flutter project.
+Weather App is and Flutter Application based on flutter version ^3.19.6.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Installation
 
-A few resources to get you started if this is your first Flutter project:
+Clone this Project
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+git clone git@github.com:kurision/weather-task-flutter.git
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Usage
+Then Run pub get in the project terminal to get all the packages.
+```bash
+flutter pub get
+```
+Then you can build and run the App.
+```bash
+flutter build apk && flutter install
+```
