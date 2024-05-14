@@ -17,11 +17,27 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
+  @override
+  void didChangeDependencies() {
+    precacheImage(const AssetImage('assets/images/back.jpg'), context);
+    precacheImage(const AssetImage('assets/animassets/anim_1.json'), context);
+    super.didChangeDependencies();
+  }
+
   Future navigate() async {
+    
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.getBool('isFirstTime') == null || prefs.getBool('isFirstTime') == true
-        ? Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HelpScreen()))
+        ? Future.delayed(const Duration(seconds: 4), () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const HelpScreen();
+                },
+              ),
+            );
+          })
         : Navigator.pushReplacement(context,
             MaterialPageRoute(builder: ((context) => const HomePageView())));
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_task/features/splash/help_screen.dart';
 
 import 'package:weather_task/features/splash/splash_screen.dart';
 
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Weather Task',
       theme: ThemeData.dark(),
-      home: const HelpScreen(),
+      home: const SplashScreen(),
     );
   }
 }
